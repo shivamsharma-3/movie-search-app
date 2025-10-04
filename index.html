@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Search App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app">
+        <!-- Header -->
+        <header class="header">
+            <div class="container">
+                <h1>🎬 Movie Search</h1>
+                <nav class="nav">
+                    <button id="homeBtn" class="nav-btn active">Search</button>
+                    <button id="watchlistBtn" class="nav-btn">
+                        Watchlist 
+                        <span id="watchlistCount" class="watchlist-count">0</span>
+                    </button>
+                </nav>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main">
+            <!-- Search Page -->
+            <div id="searchPage" class="page active">
+                <div class="container">
+                    <!-- Search Bar -->
+                    <div class="search-section">
+                        <div class="search-bar">
+                            <input 
+                                type="text" 
+                                id="searchInput" 
+                                class="form-control" 
+                                placeholder="Search for movies, TV series..." 
+                                autocomplete="off"
+                            >
+                            <div class="search-icon">🔍</div>
+                        </div>
+                    </div>
+
+                    <!-- Filters -->
+                    <div class="filters-section">
+                        <div class="filters">
+                            <div class="filter-group">
+                                <label for="yearFilter" class="form-label">Year</label>
+                                <input 
+                                    type="number" 
+                                    id="yearFilter" 
+                                    class="form-control filter-input"
+                                    placeholder="e.g. 2024"
+                                    min="1900"
+                                    max="2030"
+                                >
+                            </div>
+                            <div class="filter-group">
+                                <label for="typeFilter" class="form-label">Type</label>
+                                <select id="typeFilter" class="form-control filter-input">
+                                    <option value="">All Types</option>
+                                    <option value="movie">Movies</option>
+                                    <option value="series">TV Series</option>
+                                    <option value="episode">Episodes</option>
+                                </select>
+                            </div>
+                            <button id="clearFilters" class="btn btn--outline filter-clear">Clear</button>
+                        </div>
+                    </div>
+
+                    <!-- Recommended Movies Section -->
+                    <div id="recommendedSection" class="recommended-section">
+                        <div class="recommended-category">
+                            <div class="category-header">
+                                <h2>Action Movies</h2>
+                                <button class="view-all-btn" data-query="action" data-type="movie">View All</button>
+                            </div>
+                            <div class="category-grid" id="actionMovies"></div>
+                        </div>
+
+                        <div class="recommended-category">
+                            <div class="category-header">
+                                <h2>Comedy Classics</h2>
+                                <button class="view-all-btn" data-query="comedy" data-type="movie">View All</button>
+                            </div>
+                            <div class="category-grid" id="comedyMovies"></div>
+                        </div>
+
+                        <div class="recommended-category">
+                            <div class="category-header">
+                                <h2>Popular TV Series</h2>
+                                <button class="view-all-btn" data-query="series" data-type="series">View All</button>
+                            </div>
+                            <div class="category-grid" id="seriesMovies"></div>
+                        </div>
+                    </div>
+
+                    <!-- Search Results -->
+                    <div class="results-section">
+                        <!-- Error Message -->
+                        <div id="errorMessage" class="error-message hidden">
+                            <div class="error-content">
+                                <h3>Oops! Something went wrong</h3>
+                                <p id="errorText">Please try again later.</p>
+                                <button id="retryBtn" class="btn btn--primary">Retry</button>
+                            </div>
+                        </div>
+
+                        
+                        <!-- No Results -->
+                        <div id="noResults" class="no-results hidden">
+                            <div class="no-results-content">
+                                <h3>No movies found</h3>
+                                <p>Try adjusting your search terms or filters.</p>
+                            </div>
+                        </div>
+
+                        <h2>My Wishlist</h2>
+                        <div id="wishlist"></div>
+
+                        <!-- Movie Grid -->
+                        <div id="movieGrid" class="movie-grid hidden"></div>
+
+                        <!-- Load More Button -->
+                        <div class="load-more-section">
+                            <button id="loadMoreBtn" class="btn btn--primary load-more-btn hidden">
+                                <span id="loadMoreText">Load More Movies</span>
+                                <span id="loadMoreSpinner" class="loading-spinner-small hidden"></span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Watchlist Page -->
+            <div id="watchlistPage" class="page">
+                <div class="container">
+                    <div class="watchlist-header">
+                        <h2>My Watchlist</h2>
+                        <p class="watchlist-subtitle">Movies and shows you want to watch</p>
+                    </div>
+                    
+                    <!-- Empty Watchlist -->
+                    <div id="emptyWatchlist" class="empty-watchlist">
+                        <div class="empty-content">
+                            <h3>Your watchlist is empty</h3>
+                            <p>Start adding movies by searching and clicking the heart icon!</p>
+                            <button id="backToSearchBtn" class="btn btn--primary">Browse Movies</button>
+                        </div>
+                    </div>
+
+                    <!-- Watchlist Grid -->
+                    <div id="watchlistGrid" class="movie-grid hidden"></div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Loading Overlay -->
+        <div id="loadingOverlay" class="loading-overlay hidden">
+            <div class="loading-spinner"></div>
+            <p>Loading movies...</p>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
